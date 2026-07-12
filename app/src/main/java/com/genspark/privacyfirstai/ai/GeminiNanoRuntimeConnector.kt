@@ -70,7 +70,7 @@ data class GeminiNanoRuntimeInference(
     val engineMessage: String
 )
 
-private abstract class ProviderBackedGeminiNanoRuntimeConnector(
+internal abstract class ProviderBackedGeminiNanoRuntimeConnector(
     private val provider: GeminiNanoRuntimeProvider
 ) : GeminiNanoRuntimeConnector {
     override val mode: GeminiNanoConnectorMode = provider.mode
@@ -122,14 +122,14 @@ private abstract class ProviderBackedGeminiNanoRuntimeConnector(
     }
 }
 
-class AiCoreTodoGeminiNanoRuntimeConnector(
+internal class AiCoreTodoGeminiNanoRuntimeConnector(
     provider: GeminiNanoRuntimeProvider = AiCoreTodoGeminiNanoRuntimeProvider()
 ) : ProviderBackedGeminiNanoRuntimeConnector(provider)
 
-class QaFakeGeminiNanoRuntimeConnector(
+internal class QaFakeGeminiNanoRuntimeConnector(
     provider: GeminiNanoRuntimeProvider = QaFakeGeminiNanoRuntimeProvider()
 ) : ProviderBackedGeminiNanoRuntimeConnector(provider)
 
-class StubGeminiNanoRuntimeConnector(
+internal class StubGeminiNanoRuntimeConnector(
     provider: GeminiNanoRuntimeProvider = LegacyStubGeminiNanoRuntimeProvider()
 ) : ProviderBackedGeminiNanoRuntimeConnector(provider)

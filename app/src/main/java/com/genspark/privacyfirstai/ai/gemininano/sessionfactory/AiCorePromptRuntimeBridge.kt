@@ -61,12 +61,12 @@ class AiCorePromptRuntimeBridge(
         if (status != FeatureStatus.AVAILABLE) return null
 
         val prompt = buildClassificationPrompt(request)
-        val contentRequest = GenerateContentRequest.Builder(TextPart(prompt))
-            .setTemperature(request.temperature)
-            .setTopK(request.topK)
-            .setCandidateCount(1)
-            .setMaxOutputTokens(request.maxOutputTokens.coerceAtLeast(8))
-            .build()
+        val contentRequest = GenerateContentRequest.Builder(TextPart(prompt)).apply {
+            temperature = request.temperature
+            topK = request.topK
+            candidateCount = 1
+            maxOutputTokens = request.maxOutputTokens.coerceAtLeast(8)
+        }.build()
 
         val response = runCatching {
             client.generateContent(contentRequest).get(INFERENCE_TIMEOUT_SECONDS, TimeUnit.SECONDS)
