@@ -1,8 +1,7 @@
 # On-device Privacy First App
 
-> Replace `OWNER/REPO` in the badge below with your actual GitHub repository path after the first push.
->
-> [![verify-version-policy](https://github.com/OWNER/REPO/actions/workflows/verify.yml/badge.svg)](https://github.com/OWNER/REPO/actions/workflows/verify.yml)
+
+> [![verify-version-policy](https://github.com/thakion5-hue/ondevice_privacy_first_app/actions/workflows/verify.yml/badge.svg)](https://github.com/thakion5-hue/ondevice_privacy_first_app/actions/workflows/verify.yml)
 
 An Android app that runs privacy-sensitive AI features **fully on-device** (Gemini Nano / AICore-backed runtime, with graceful fallbacks). All personal data — messages, photos, journal drafts, receipts — is inspected locally and never uploaded.
 
