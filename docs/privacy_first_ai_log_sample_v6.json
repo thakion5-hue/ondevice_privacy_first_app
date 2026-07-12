@@ -1,0 +1,95 @@
+{
+  "schema_version": 6,
+  "exported_at": 1751328000000,
+  "exported_at_iso": "2025-07-01T00:00:00+0000",
+  "app_profile": "privacy_first_ai",
+  "settings": {
+    "spam_filter_mode": "balanced",
+    "preferred_runtime": "gemini_nano",
+    "gemini_nano_connector_mode": "qa_fake",
+    "auto_index_after_permission_grant": true
+  },
+  "gemini_nano_connector": {
+    "mode": "qa_fake",
+    "mode_label": "QA Fake",
+    "available": true,
+    "status": "ready",
+    "binding_phase": "bound",
+    "contract_summary": "fake session trace enabled for QA",
+    "detail": "sample export structure only",
+    "provider": {
+      "status": "ready",
+      "summary": "provider reachable",
+      "layer": "qa_fake_provider"
+    },
+    "session_factory": {
+      "status": "ready",
+      "summary": "fake session factory attached",
+      "layer": "qa_fake_factory",
+      "inference_entry_point": "generateContent",
+      "output_expectation": "classify_text",
+      "fallback_policy": "report_only"
+    },
+    "todo_checklist": [
+      "Replace sample values with runtime snapshot during real export"
+    ],
+    "inference_trace": {
+      "schema": "gemini_nano_inference_trace_v1",
+      "buffered": 1,
+      "capacity": 50,
+      "last_label": "sample_trace",
+      "last_latency_ms": 183,
+      "records": [
+        {
+          "trace_id": "trace_sample_001",
+          "request_id": "request_sample_001",
+          "session_label": "qa_fake_session",
+          "connector_mode": "qa_fake",
+          "provider_label": "qa_fake_provider",
+          "factory_label": "qa_fake_factory",
+          "input_preview": "sample prompt preview",
+          "input_char_length": 21,
+          "input_token_estimate": 6,
+          "hit_signals": [
+            "sample"
+          ],
+          "link_detected": false,
+          "decision_rule": "qa_stub",
+          "output_label": "safe",
+          "output_score": 0.98,
+          "output_logits": [
+            0.02,
+            0.98
+          ],
+          "output_confidence_band": "high",
+          "started_at": 1751328000100,
+          "completed_at": 1751328000283,
+          "latency_ms": 183
+        }
+      ]
+    }
+  },
+  "runtime_diagnostics": [
+    {
+      "id": "gemini_nano",
+      "label": "Gemini Nano",
+      "available": true,
+      "status": "ready",
+      "detail": "sample runtime diagnostic",
+      "badge_tone": "positive"
+    }
+  ],
+  "runtimes": [
+    {
+      "id": "gemini_nano",
+      "type": "on_device_llm",
+      "status": "available",
+      "purpose": "text classification",
+      "notes": "sample manifest item"
+    }
+  ],
+  "threat_scans": [],
+  "media_insights": [],
+  "device_photos": [],
+  "receipt_memories": []
+}

@@ -1,0 +1,139 @@
+{
+  "app_profile": "privacy_first_ondevice_ai_v6_5",
+  "active_runtimes": [
+    {
+      "id": "mlkit_korean_ocr",
+      "type": "mlkit",
+      "status": "enabled",
+      "purpose": "receipt_ocr_and_ad_text_scan",
+      "notes": "Google ML Kit Korean Text Recognition runs fully on-device after model download."
+    },
+    {
+      "id": "mlkit_image_labeling",
+      "type": "mlkit",
+      "status": "enabled",
+      "purpose": "gallery_cleanup_and_document_guessing",
+      "notes": "On-device image labeling for quick local inspection and categorization."
+    },
+    {
+      "id": "spam_keyword_linear_tflite",
+      "type": "tflite",
+      "status": "enabled",
+      "asset": "spam_keyword_linear.tflite",
+      "purpose": "spam_classifier",
+      "notes": "Lightweight linear keyword-vector classifier executed through TensorFlow Lite Interpreter on-device. Safe fallback to heuristics if init fails."
+    },
+    {
+      "id": "room_history_store",
+      "type": "room",
+      "status": "enabled",
+      "purpose": "persistent_receipt_scan_media_index_storage",
+      "notes": "Receipt OCR history, threat scan logs, imported media insights and MediaStore snapshots are persisted locally."
+    },
+    {
+      "id": "mediastore_recent_photo_index",
+      "type": "android_mediastore",
+      "status": "enabled",
+      "purpose": "device_gallery_indexing",
+      "notes": "Indexes recent device images with screenshot/receipt/document heuristics."
+    },
+    {
+      "id": "settings_permission_center",
+      "type": "local_ui",
+      "status": "enabled",
+      "purpose": "permission_ux_and_model_switching",
+      "notes": "Provides runtime permission guidance, app-settings deep link and spam engine mode switching UI."
+    },
+    {
+      "id": "settings_diagnostics_export_and_share",
+      "type": "local_ui",
+      "status": "enabled",
+      "purpose": "debug_info_db_management_json_log_export_fileprovider_share",
+      "notes": "Shows TFLite readiness, DB row counts, per-DB purge, JSON snapshot export and FileProvider based share actions with snackbar/toast feedback."
+    },
+    {
+      "id": "settings_runtime_status_badges",
+      "type": "local_ui",
+      "status": "enabled",
+      "purpose": "runtime_badge_feedback_design",
+      "notes": "Runtime selection cards and Clean Guard engine state surface selected/status/fallback badges for quicker QA diagnostics."
+    },
+    {
+      "id": "gemini_nano_connector_mode_switcher",
+      "type": "local_ui",
+      "status": "enabled",
+      "purpose": "aicore_contract_vs_fake_connector_switching",
+      "notes": "Settings now expose Gemini Nano connector mode switching so QA can swap between AICore TODO contract, QA fake connector and legacy stub without code changes, while also surfacing provider/session-factory status."
+    },
+    {
+      "id": "vendor_runtime_adapter_registry",
+      "type": "local_runtime_router",
+      "status": "enabled",
+      "purpose": "runtime_selection_and_safe_fallback_chain",
+      "notes": "Routes text classification requests through selected vendor adapter and falls back to bundled TFLite when unavailable."
+    },
+    {
+      "id": "gemini_nano_connector_interface",
+      "type": "vendor_runtime_connector",
+      "status": "enabled",
+      "purpose": "future_gemini_nano_sdk_binding_boundary",
+      "notes": "Gemini Nano boundary now exposes structured connector contracts above provider and session-factory layers so future AICore / OEM binding can be swapped without changing UI/router code."
+    },
+    {
+      "id": "gemini_nano_aicore_todo_contract",
+      "type": "vendor_runtime_connector",
+      "status": "scaffold",
+      "purpose": "future_aicore_local_text_session_binding",
+      "notes": "v6.6 starts the real Android AICore/Gemini Nano binding through ML Kit Prompt API: provider diagnostics now include Prompt availability, session factory opens a real on-device session when FeatureStatus is AVAILABLE, and settings now expose in-app download/retry UX for DOWNLOADABLE and DOWNLOADING states."
+    },
+    {
+      "id": "gemini_nano_provider_layer_scaffold",
+      "type": "vendor_runtime_provider",
+      "status": "scaffold",
+      "purpose": "future_aicore_provider_probe_and_entitlement_resolution",
+      "notes": "v6.6 keeps the split provider layout and adds AiCoreFeatureFlagProbe so provider diagnostics combine OS capability, Prompt API availability, download progress, retry state, and entitlement gating before opening a real session."
+    },
+    {
+      "id": "gemini_nano_inference_trace_recorder",
+      "type": "vendor_runtime_diagnostic",
+      "status": "enabled",
+      "purpose": "fake_and_future_real_session_input_output_trace",
+      "notes": "v6.6 keeps the GeminiNanoInferenceTrace ring buffer and now reuses the same trace schema for both fake session inference and real ML Kit Prompt-based AICore session inference."
+    },
+    {
+      "id": "gemini_nano_session_factory_layer",
+      "type": "vendor_runtime_session_factory",
+      "status": "enabled",
+      "purpose": "future_local_text_session_creation_boundary",
+      "notes": "v6.6 keeps the split session-factory layout and upgrades AiCoreTodoSessionFactoryV2 to open a real ML Kit Prompt session when AVAILABLE, while surfacing DOWNLOADABLE/DOWNLOADING/retry state in diagnostics and preserving deterministic QA trace instrumentation."
+    },
+    {
+      "id": "gemini_nano_qa_fake_connector",
+      "type": "vendor_runtime_connector",
+      "status": "enabled",
+      "purpose": "qa_deterministic_local_inference_path",
+      "notes": "Deterministic fake Gemini Nano connector for QA and demos. Produces safe/caution/fraud locally without vendor SDK or network."
+    },
+    {
+      "id": "gemini_nano_adapter_scaffold",
+      "type": "vendor_runtime_adapter",
+      "status": "enabled",
+      "purpose": "future_gemini_nano_text_inference_bridge",
+      "notes": "Gemini Nano adapter now resolves connector mode dynamically and consumes provider-backed connectors, while preserving connector-specific model_source values and safe TFLite fallback."
+    },
+    {
+      "id": "qualcomm_ai_engine_adapter_scaffold",
+      "type": "vendor_runtime_adapter",
+      "status": "scaffold",
+      "purpose": "future_qnn_text_inference_bridge",
+      "notes": "Placeholder adapter for Qualcomm AI Engine / QNN integration with safe fallback path."
+    },
+    {
+      "id": "samsung_gauss_adapter_scaffold",
+      "type": "vendor_runtime_adapter",
+      "status": "scaffold",
+      "purpose": "future_samsung_gauss_text_inference_bridge",
+      "notes": "Placeholder adapter for Samsung Gauss runtime integration with safe fallback path."
+    }
+  ]
+}
