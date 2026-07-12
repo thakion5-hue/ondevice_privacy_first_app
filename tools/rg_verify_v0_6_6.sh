@@ -205,8 +205,10 @@ invoke_rg() {
   rg "${COMMON_ARGS[@]}" "$pattern" . >"$out_file" 2>"$err_file"
   RG_EXIT_CODE=$?
   RG_ERROR=$(cat "$err_file")
-  mapfile -t RG_LINES <"$out_file" || true
-
+  RG_LINES=()
+while IFS= read -r __rg_line || [[ -n "$__rg_line" ]]; do
+  RG_LINES+=("$__rg_line")
+done <"$out_file"
   rm -f "$out_file" "$err_file"
 }
 
