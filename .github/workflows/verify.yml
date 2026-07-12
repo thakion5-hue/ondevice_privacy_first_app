@@ -1,0 +1,73 @@
+name: verify-version-policy
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-powershell:
+    name: verify (pwsh, ubuntu)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Ensure ripgrep is available
+        shell: bash
+        run: |
+          if command -v rg >/dev/null 2>&1; then
+            rg --version | head -1
+            exit 0
+          fi
+          sudo apt-get update
+          sudo apt-get install -y ripgrep
+
+      - name: Run PowerShell verifier in CI mode
+        shell: pwsh
+        run: ./tools/rg_verify_v0_6_6.ps1 -CI
+
+  verify-bash:
+    name: verify (bash, ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Ensure ripgrep is available
+        shell: bash
+        run: |
+          if command -v rg >/dev/null 2>&1; then
+            rg --version | head -1
+            exit 0
+          fi
+          case "$RUNNER_OS" in
+            Linux)
+              sudo apt-get update
+              sudo apt-get install -y ripgrep
+              ;;
+            macOS)
+              brew install ripgrep
+              ;;
+            *)
+              echo "Unsupported runner OS: $RUNNER_OS" >&2
+              exit 1
+              ;;
+          esac
+
+      - name: Run bash verifier in CI mode
+        shell: bash
+        run: |
+          chmod +x ./tools/rg_verify_v0_6_6.sh
+          ./tools/rg_verify_v0_6_6.sh --ci
