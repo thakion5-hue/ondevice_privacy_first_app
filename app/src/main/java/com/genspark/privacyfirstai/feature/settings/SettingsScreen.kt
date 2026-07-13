@@ -50,6 +50,7 @@ import com.genspark.privacyfirstai.domain.model.DebugSnapshot
 import com.genspark.privacyfirstai.domain.model.GeminiNanoConnectorMode
 import com.genspark.privacyfirstai.domain.model.SpamFilterMode
 import com.genspark.privacyfirstai.domain.model.VendorRuntimeOption
+import com.genspark.privacyfirstai.ui.component.AppScreen
 import com.genspark.privacyfirstai.ui.component.RuntimeBadge
 import java.io.File
 import java.text.SimpleDateFormat
@@ -92,7 +93,7 @@ fun SettingsScreen(vm: SettingsViewModel, paddingValues: PaddingValues) {
         }
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    AppScreen {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
